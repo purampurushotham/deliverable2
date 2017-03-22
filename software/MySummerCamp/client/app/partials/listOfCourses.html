@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div ng-show ="!pc.tableExists">table doesm't exists </div>
+    <div class="row panel panel-info">
+        <div class="panel-heading">
+            <h3  class="panel-title text-center">Courses <span class=pull-right><i ng-click ="hmc.addCourses()" class="fa fa-plus-square fa-lg " aria-hidden="true" ></i></span></h3>
+        </div>
+        <div class="col-md-12 panel-body" >
+            <table ng-table="hm.tableParams" class="table table-condensed table-bordered table-striped">
+                <tr  ng-show ="hm.exists" ui-sref="view({id:$index})" ng-repeat="row in $data track by $index">
+                    <td data-title="'Name'"  filter="{Name: 'text'}" sortable="'Name'" ng-bind="row.Name"></td>
+                    <td data-title="'Description'" filter="{description: 'text'}" sortable="'description'" ng-bind="row.text"></td>
+                    <td data-title="'Duration'" filter="{duration: 'date'}" sortable="'duration'" ng-bind="row.postedOn"></td>
+                    <td data-title="'no Of Days'" filter="{noOfDays: 'text'}" sortable="'noOfDays'" ng-bind="row.postedBy"></td>
+                    <td data-title="'Coach'" filter="{coach: 'text'}" sortable="'Coach'" ng-bind="row.Coach"></td>
+                    <td data-title="'fee'" filter="{fee: 'number'}" sortable="'fee'" ng-bind="row.fee"></td>
+                    <!--<td data-title="'courseSlot'" filter="{postedBy: 'text'}" sortable="'postedBy'" ng-bind="row.postedBy"></td>-->
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

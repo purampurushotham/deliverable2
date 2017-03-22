@@ -1,0 +1,19 @@
+{
+  "CourseSlot" : [
+    {
+      "timeSlot" : "10:30AM - 11:30AM",
+      "noOfStudents" : 1,
+      "availableSlots" : 10
+    },
+    {
+      "timeSlot" : "11:30AM - 12:30PM",
+      "noOfStudents" : 3,
+      "availableSlots" : 10
+    },
+    {
+      "timeSlot" : "12:30PM - 1:30PM",
+      "noOfStudents" : 2,
+      "availableSlots" : 10
+    }
+  ]
+}

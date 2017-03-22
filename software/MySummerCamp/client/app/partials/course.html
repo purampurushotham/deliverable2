@@ -1,0 +1,70 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title" >Add Address </h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <form name="tc.courseForm"  role="form">
+        <div class="form-group" ><!--ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }"-->
+            <label for="Type">Type</label>
+            <input type="text" name="name" id="Type" class="form-control" ng-model="tc.course.name" required />
+            <span  ng-show="tc.courseForm.name.$dirty && tc.courseForm.name.$error.required" class="has-error">name is required</span>
+            <!--<span  ng-show="!tc.exists" class="help-block">{{tc.course.email}} already exists</span>-->
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.description.$dirty && form.description.$error.required }">
+            <label for="description">description</label>
+            <input type="text" name="description" id="description" class="form-control" ng-model="tc.course.description" required />
+            <span ng-show="tc.courseForm.description.$dirty && tc.courseForm.description.$error.required" >description  is required</span>
+            <!--<span ng-show="!tc.exists"> invalid email or password </span>-->
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.duration.$dirty && form.duration.$error.required }">
+            <label for="duration">duration</label>
+            <input type="text" name="duration" id="duration" class="form-control" ng-model="tc.course.duration" required />
+            <span ng-show="tc.courseForm.duration.$dirty && tc.courseForm.duration.$error.required" >duration  is required</span>
+            <!--<span ng-show="!tc.exists"> invalid email or password </span>-->
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.noOfDays.$dirty && form.noOfDays.$error.required }">
+            <label for="noOfDays">noOfDays</label>
+            <input type="number" name="noOfDays" id="noOfDays" class="form-control" ng-model="tc.course.noOfDays" required />
+            <span ng-show="tc.courseForm.noOfDays.$dirty && tc.courseForm.noOfDays.$error.required" >noOfDays  is required</span>
+            <!--<span ng-show="!tc.exists"> invalid email or password </span>-->
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.coach.$dirty && form.coach.$error.required }">
+            <label for="coach">coach</label>
+            <input type="text" name="coach" id="city" class="form-control" ng-model="tc.course.coach" required />
+            <span ng-show="tc.courseForm.coach.$dirty && tc.courseForm.coach.$error.required" >coach  is required</span>
+            <!--<span ng-show="!tc.exists"> invalid email or password </span>-->
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.fee.$dirty && form.fee.$error.required }">
+            <label for="fee">fee</label>
+            <input type="number" name="fee" id="fee" class="form-control" ng-model="tc.course.fee" required />
+            <span ng-show="tc.courseForm.fee.$dirty && tc.courseForm.fee.$error.required" >fees  is required</span>
+            <!--<span ng-show="!tc.exists"> invalid email or password </span>-->
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.timeSolt.$dirty && form.timeSolt.$error.required }">
+            <label for="timeSolt">timeSolt</label>
+            <select ng-model="tc.course.timeSlot" ng-options="x for x in tc.timeSlots">
+            </select>
+            <span ng-show="tc.courseForm.timeSlot.$dirty && tc.courseForm.timeSlot.$error.required" >timeSlot  is required</span>
+            <!--<span ng-show="!tc.exists"> invalid email or password </span>-->
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.timeSolt.$dirty && form.timeSolt.$error.required }">
+            <label for="noOfStudents">noOfStudents</label>
+            <select ng-model="tc.course.noOfStudents" ng-options="x for x in tc.Students">
+            </select>
+            <span ng-show="tc.courseForm.noOfStudents.$dirty && tc.courseForm.noOfStudents.$error.required" >noOfStudents  is required</span>
+            <!--<span ng-show="!tc.exists"> invalid email or password </span>-->
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.timeSolt.$dirty && form.timeSolt.$error.required }">
+            <label for="availableSlots">availableSlots</label>
+            <select ng-model="tc.course.availableSlots" ng-options="x for x in tc.availableSlots">
+            </select>
+            <span ng-show="tc.courseForm.availableSlots.$dirty && tc.courseForm.availableSlots.$error.required" >availableSlots  is required</span>
+            <!--<span ng-show="!tc.exists"> invalid email or password </span>-->
+        </div>
+        <div class="form-actions">
+            <button type="submit"  ng-disabled="tc.courseForm.$invalid" class="btn btn-primary" ng-click ="tc.submit()">Save</button>
+            <button class="btn btn-danger" type="button" ng-click="tc.cancel()">Cancel</button>
+        </div>
+
+    </form>
+
+</div>
