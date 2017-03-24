@@ -29,6 +29,18 @@
             'createCourse': {
                 method: "POST",
                 url: "/api/v1.0/createCourse"
+            },
+            'getCourses' : {
+                method: "GET",
+                url: "/api/v1.0/getCourses"
+            },
+            'checkMail' : {
+                method : "GET",
+                url : "/api/v1.0/checkMail"
+            },
+            'enrollStudent' : {
+                method : 'POST',
+                url : "/api/v1.0/enrollStudent"
             }
         }
     }

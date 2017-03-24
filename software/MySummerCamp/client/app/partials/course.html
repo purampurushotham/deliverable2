@@ -39,24 +39,20 @@
             <span ng-show="tc.courseForm.fee.$dirty && tc.courseForm.fee.$error.required" >fees  is required</span>
             <!--<span ng-show="!tc.exists"> invalid email or password </span>-->
         </div>
-        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.timeSolt.$dirty && form.timeSolt.$error.required }">
+            <div >
             <label for="timeSolt">timeSolt</label>
-            <select ng-model="tc.course.timeSlot" ng-options="x for x in tc.timeSlots">
-            </select>
-            <span ng-show="tc.courseForm.timeSlot.$dirty && tc.courseForm.timeSlot.$error.required" >timeSlot  is required</span>
+            <div ng-dropdown-multiselect=""  options="tc.timeSlots" selected-model="tc.course.slots.timeSlotModel"></div>
             <!--<span ng-show="!tc.exists"> invalid email or password </span>-->
         </div>
-        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.timeSolt.$dirty && form.timeSolt.$error.required }">
+        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.fee.$dirty && form.fee.$error.required }">
             <label for="noOfStudents">noOfStudents</label>
-            <select ng-model="tc.course.noOfStudents" ng-options="x for x in tc.Students">
-            </select>
+            <input type="number" name="noOfStudents" id="fee" class="form-control" ng-model="tc.course.noOfStudents" required />
             <span ng-show="tc.courseForm.noOfStudents.$dirty && tc.courseForm.noOfStudents.$error.required" >noOfStudents  is required</span>
             <!--<span ng-show="!tc.exists"> invalid email or password </span>-->
         </div>
-        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.timeSolt.$dirty && form.timeSolt.$error.required }">
+        <div class="form-group" ng-class="{ 'has-error': tc.courseForm.fee.$dirty && form.fee.$error.required }">
             <label for="availableSlots">availableSlots</label>
-            <select ng-model="tc.course.availableSlots" ng-options="x for x in tc.availableSlots">
-            </select>
+            <input type="number" name="availableSlots" id="availableSlots" class="form-control" ng-model="tc.course.availableSlots" required />
             <span ng-show="tc.courseForm.availableSlots.$dirty && tc.courseForm.availableSlots.$error.required" >availableSlots  is required</span>
             <!--<span ng-show="!tc.exists"> invalid email or password </span>-->
         </div>

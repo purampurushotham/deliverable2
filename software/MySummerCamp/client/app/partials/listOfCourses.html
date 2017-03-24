@@ -9,14 +9,19 @@
             <h3  class="panel-title text-center">Courses <span class=pull-right><i ng-click ="hmc.addCourses()" class="fa fa-plus-square fa-lg " aria-hidden="true" ></i></span></h3>
         </div>
         <div class="col-md-12 panel-body" >
-            <table ng-table="hm.tableParams" class="table table-condensed table-bordered table-striped">
-                <tr  ng-show ="hm.exists" ui-sref="view({id:$index})" ng-repeat="row in $data track by $index">
-                    <td data-title="'Name'"  filter="{Name: 'text'}" sortable="'Name'" ng-bind="row.Name"></td>
-                    <td data-title="'Description'" filter="{description: 'text'}" sortable="'description'" ng-bind="row.text"></td>
-                    <td data-title="'Duration'" filter="{duration: 'date'}" sortable="'duration'" ng-bind="row.postedOn"></td>
-                    <td data-title="'no Of Days'" filter="{noOfDays: 'text'}" sortable="'noOfDays'" ng-bind="row.postedBy"></td>
-                    <td data-title="'Coach'" filter="{coach: 'text'}" sortable="'Coach'" ng-bind="row.Coach"></td>
+            <table ng-table="hmc.tableParams" class="table table-condensed table-bordered table-striped">
+                <tr  ng-repeat="row in $data track by $index">
+                    <td data-title="'Name'"  filter="{name: 'text'}" sortable="'name'" ng-bind="row.name"></td>
+                    <td data-title="'Description'" filter="{description: 'text'}" sortable="'description'" ng-bind="row.description"></td>
+                    <td data-title="'Duration'" filter="{duration: 'date'}" sortable="'duration'" ng-bind="row.duration"></td>
+                    <td data-title="'no Of Days'" filter="{noOfDays: 'text'}" sortable="'noOfDays'" ng-bind="row.noOfDays"></td>
+                    <td data-title="'Coach'" filter="{coach: 'text'}" sortable="'c  oach'" ng-bind="row.coach"></td>
                     <td data-title="'fee'" filter="{fee: 'number'}" sortable="'fee'" ng-bind="row.fee"></td>
+                    <td data-title="'Avaialable Seats'" filter="{availableSeats: 'number'}" sortable="'availableSeats'" ng-bind="row.availableSeats"></td>
+                    <td> <a ui-sref="enroll({id : $index})">
+                        <button class="btn btn-primary" ng-disabled ="row.availableSeats < 0">Enroll</button>
+                    </a>
+                    </td>
                     <!--<td data-title="'courseSlot'" filter="{postedBy: 'text'}" sortable="'postedBy'" ng-bind="row.postedBy"></td>-->
                 </tr>
             </table>

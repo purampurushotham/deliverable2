@@ -5,9 +5,13 @@
     'use strict';
     angular.module("MSC", [
         'ui.router',
+        'angular-dropdown-multiselect',
+        'ngTable',
         'ngResource',
+        'ngStorage',
         'ui.bootstrap',
         'MSC.header',
-        'MSC.home'
+        'MSC.home',
+        'MSC.enroll'
     ]);
 }());

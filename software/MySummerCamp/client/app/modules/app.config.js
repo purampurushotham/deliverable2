@@ -15,6 +15,12 @@
             .state("Home", {
                 url: "/Home",
                 templateUrl: "app/partials/home.html",
+            })
+            .state('enroll',{
+               url :"/enroll/:id",
+                templateUrl : "app/partials/enrollStudent.html",
+                controller : "enrollCtrl",
+                controllerAs : "ec"
             });
     }
 }());

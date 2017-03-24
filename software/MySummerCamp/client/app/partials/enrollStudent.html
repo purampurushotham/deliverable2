@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1> Course Details</h1>
+            <form name="form" role="form">
+                <div class="form-group" >
+                    <label for="name">Course name</label>
+                    <input type="text" name="name" id="name" class="form-control" ng-model="ec.course.name" ng-readonly="true"/>
+                </div>
+                <div class="form-group" >
+                    <label for="Description">Description</label>
+                    <input type="text" name="description" id="description" class="form-control" ng-model="ec.course.description" ng-readonly="true"/>
+                </div>
+                <div class="form-group" >
+                    <label for="duration">duration</label>
+                    <input type="text" name="duration" id="duration" class="form-control" ng-model="ec.course.duration" ng-readonly="true"/>
+                </div>
+                <div class="form-group" >
+                    <label for="noOfDays">noOfDays</label>
+                    <input type="number" name="noOfDays" id="noOfStudents" class="form-control" ng-model="ec.course.noOfDays" ng-readonly="true"/>
+                </div>
+                <div class="form-group">
+                    <label for="coach">coach</label>
+                    <input type="text" name="coach" id="coach" class="form-control" ng-model="ec.course.coach" ng-readonly="true"/>
+                </div>
+                <div class="form-group" >
+                    <label for="fees">fees</label>
+                    <input type="number" name="fee" id="fee" class="form-control" ng-model="ec.course.fee" ng-readonly="true"/>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h1>Enroll Student</h1>
+            <form name="form" ng-submit="ec.submitUser()" role="form">
+                <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+                    <label for="firstName">First name</label>
+                    <input type="text" name="firstName" id="firstName" class="form-control" ng-model="ec.student.firstName" ng-minlength="5"  required />
+                    <span  ng-show="form.firstName.$dirty && form.firstName.$error.minlength    " class="help-block">First name is short</span>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
+                    <label for="lastName">Last name</label>
+                    <input type="text" name="lastName" id="Text1" class="form-control" ng-model="ec.student.lastName"  ng-minlength="5" required />
+                    <span ng-show="form.lastName.$dirty && form.lastName.$error.minlength " class="help-block">Last name is required</span>
+                </div>
+                <div class="form-group" ><!--ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }"-->
+                    <label for="email">email</label>
+                    <input type="email" name="userEmail" id="userEmail" class="form-control" ng-model="ec.student.email" ng-keyup="ec.checkmail()"required />
+                    <span ng-if="!ec.exists" ng-show="form.userEmail.$dirty && form.userEmail.$error.email" class="help-block">Not a valid email Id</span>
+                    <span  ng-show="ec.exists" class="help-block">{{ec.student.email}} already exists</span>
+                </div>
+                <div class="form-group" >
+                    <label for="name">Course name</label>
+                    <input type="text" name="name" id="name" class="form-control" ng-model="ec.student.course "/>
+                </div>
+                <div class="form-group"  ng-repeat="slot in ec.courseSlot.timeSlot">
+                    <label>
+                        <input type="radio" ng-model="ec.student.timeSlot" ng-click="ec.studentSlotObject(ec.courseSlot.id[[$index]])" name="time" value="{{slot}}" required />
+                        {{slot}}
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" ng-click="ec.submit()">save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
