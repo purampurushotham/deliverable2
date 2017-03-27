@@ -14,7 +14,8 @@
         return setOfServices;
         function checkMail(keyword) {
             var query={}
-            query=keyword;
+            query.keyword=keyword;
+            console.log(query)
             return api.checkMail({q: query}).$promise
         }
         function enrollStudent(q){

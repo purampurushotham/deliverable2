@@ -32,21 +32,25 @@
         <div class="col-md-6">
             <h1>Enroll Student</h1>
             <form name="form" ng-submit="ec.submitUser()" role="form">
-                <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+                <div class="form-group" ng-messages="form.firstName.$dirty && form.firstName.$error"> <!--ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }"-->
                     <label for="firstName">First name</label>
                     <input type="text" name="firstName" id="firstName" class="form-control" ng-model="ec.student.firstName" ng-minlength="5"  required />
-                    <span  ng-show="form.firstName.$dirty && form.firstName.$error.minlength    " class="help-block">First name is short</span>
+                    <!--<span  ng-show="form.firstName.$dirty && form.firstName.$error.minlength    " class="help-block">First name is short</span>-->
+                    <p ng-message="minlength" class="alert-danger">Your name is too short.</p>
+                    <p ng-message="required" class="alert-danger">Your name is required.</p>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
                     <label for="lastName">Last name</label>
                     <input type="text" name="lastName" id="Text1" class="form-control" ng-model="ec.student.lastName"  ng-minlength="5" required />
                     <span ng-show="form.lastName.$dirty && form.lastName.$error.minlength " class="help-block">Last name is required</span>
                 </div>
-                <div class="form-group" ><!--ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }"-->
+                <div class="form-group" ng-messages = "form.email.$dirty && form.email.$error.required "><!--ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }"-->
                     <label for="email">email</label>
                     <input type="email" name="userEmail" id="userEmail" class="form-control" ng-model="ec.student.email" ng-keyup="ec.checkmail()"required />
-                    <span ng-if="!ec.exists" ng-show="form.userEmail.$dirty && form.userEmail.$error.email" class="help-block">Not a valid email Id</span>
-                    <span  ng-show="ec.exists" class="help-block">{{ec.student.email}} already exists</span>
+                    <span ng-if="!ec.exists" ng-show="form.userEmail.$dirty &&form.userEmail.required &&form.userEmail.$error.email" class="help-block">Not a valid email Id</span>
+                    <span  ng-show="ec.exists" class="alert-danger">{{ec.student.email}} already exists</span>
+
+
                 </div>
                 <div class="form-group" >
                     <label for="name">Course name</label>
@@ -54,7 +58,7 @@
                 </div>
                 <div class="form-group"  ng-repeat="slot in ec.courseSlot.timeSlot">
                     <label>
-                        <input type="radio" ng-model="ec.student.timeSlot" ng-click="ec.studentSlotObject(ec.courseSlot.id[[$index]])" name="time" value="{{slot}}" required />
+                        <input type="radio" ng-model="ec.student.timeSlot" ng-disabled="ec.courseSlot.availableSlots[$index] === 0" ng-click="ec.studentSlotObject(ec.courseSlot.id[$index])" name="time" value="{{slot}}" required />
                         {{slot}}
                     </label>
                 </div>

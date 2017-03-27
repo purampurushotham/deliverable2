@@ -12,8 +12,9 @@ var StudentRoute= {
     checkMail: function (req, res) {
         var queryParam = (req.query && req.query.q) ? JSON.parse(req.query.q) : req.body.q
         console.log(queryParam)
-        var regularExpression = "/^" + queryParam + "/i";
-        var regex = new RegExp(queryParam, "i");
+        var regularExpression = "/^" + queryParam.keyword + "/i";
+        var regex = new RegExp(queryParam.keyword, "i");
+        console.log(regex)
         var query = {email: {$regex: regex}};
         student.findOne(query).exec(function (err, emailsSet) {
             console.log({data: emailsSet});

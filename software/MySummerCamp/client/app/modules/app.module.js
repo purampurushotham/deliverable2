@@ -9,6 +9,7 @@
         'ngTable',
         'ngResource',
         'ngStorage',
+        'ngMessages',
         'ui.bootstrap',
         'MSC.header',
         'MSC.home',

@@ -19,10 +19,9 @@
                     <td data-title="'fee'" filter="{fee: 'number'}" sortable="'fee'" ng-bind="row.fee"></td>
                     <td data-title="'Avaialable Seats'" filter="{availableSeats: 'number'}" sortable="'availableSeats'" ng-bind="row.availableSeats"></td>
                     <td> <a ui-sref="enroll({id : $index})">
-                        <button class="btn btn-primary" ng-disabled ="row.availableSeats < 0">Enroll</button>
+                        <button class="btn btn-primary" ng-disabled ="row.availableSeats === 0">Enroll</button>
                     </a>
                     </td>
-                    <!--<td data-title="'courseSlot'" filter="{postedBy: 'text'}" sortable="'postedBy'" ng-bind="row.postedBy"></td>-->
                 </tr>
             </table>
         </div>

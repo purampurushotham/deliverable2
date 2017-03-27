@@ -6,13 +6,14 @@ var course=require('../../models/course/course');
 var coursesslot=require('../../models/courseSlot/courseSlot');
 var SuccessResponse =require('../../models/successResponse/SuccessResponse');
 var ErrorResult =require('../../models/errorResult/ErrorResult');
+var appUtils=require('../../utils/app.utils')
 var Q=require('q');
 //var Student=require('../../models/Student/student');
 var coursesRoute= {
     createCourse: function (req, res) {
         var queryParam = (req.query && req.query.q) ? JSON.parse(req.query.q) : req.body.q;
         console.log(queryParam);
-        var cs = {};
+        var eachCourse = {};
         var newCourse = {};
         newCourse.courseSlot = [];
         console.log(queryParam.slot);
@@ -20,12 +21,10 @@ var coursesRoute= {
             var deffered = Q.defer();
             console.log(slotIndex);
             console.log("***** inside loop");
-            cs.timeSlot=slotObj.timeSlot.label;
-            cs.noOfStudents=queryParam.course.noOfStudents;
-            cs.availableSlots=queryParam.course.availableSlots;
-            console.log(cs);
-            var co = new coursesslot(cs);
-            co.save(function (err, Slot) {
+            var eachSlot=appUtils.getCourseSlotObj(slotObj.timeSlot.label,queryParam.course.noOfStudents,queryParam.course.availableSlots)
+            console.log(eachSlot);
+            var newCourseSlot = new coursesslot(eachSlot);
+            newCourseSlot.save(function (err, Slot) {
                 if (err) {
                     deffered.reject(err);
                     res.send(err);
@@ -37,16 +36,10 @@ var coursesRoute= {
                     console.log(newCourse.courseSlot);
                     if(slotIndex == queryParam.slot.length-1){
                         console.log("***** after loop");
-                        newCourse.name = queryParam.course.name;
-                        newCourse.description = queryParam.course.description;
-                        newCourse.duration = queryParam.course.duration;
-                        newCourse.noOfDays = queryParam.course.noOfDays;
-                        newCourse.coach = queryParam.course.coach;
-                        newCourse.fee = queryParam.course.fee;
-                        //console.log(newCourse)
-                        var c = new course(newCourse)
+                        newCourse=appUtils.getCourseObj(queryParam);
+                        var newCourseObj = new course(newCourse)
                         //  console.log(c)
-                        c.save(function (err1, response) {
+                        newCourseObj.save(function (err1, response) {
                             if (err1) {
                                 res.send(err1);
                             }
@@ -76,20 +69,10 @@ var coursesRoute= {
                         console.log(response);
                         var courses = [];
                         for (var i = 0; i < response.length; i++) {
-                            var c = {};
-                            var e = response[i];
-                            c.name = e.name;
-                            c.description = e.description;
-                            c.duration = e.duration;
-                            c.noOfDays = e.noOfDays;
-                            c.coach = e.coach;
-                            c.fee = e.fee.value;
-                            c.id=e._id;
-                            c.courseSlot=[];
-                            e.courseSlot.forEach(function(slot){
-                                c.courseSlot.push(slot)
-                            });
-                            courses.push(c);
+                            var courseList = {};
+                            var eachCourse = response[i];
+                            courseList=appUtils.getListOfCourses(eachCourse);
+                            courses.push(courseList);
                             var pagination = {};
                             pagination.total = result;
 

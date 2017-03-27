@@ -6,16 +6,15 @@
     'use strict';
     angular.module("MSC.enroll")
         .controller("enrollCtrl",enrollCtrl);
-    enrollCtrl.$inject=['$localStorage','courseService','$stateParams','studentService']
-    function enrollCtrl($localStorage,courseService,$stateParams,studentService){
+    enrollCtrl.$inject=['$localStorage','courseService','$stateParams','studentService','$state']
+    function enrollCtrl($localStorage,courseService,$stateParams,studentService,$state){
         var vm=this;
-        console.log($localStorage.courseDetails )
         vm.student={}
         vm.student.course=$localStorage.courseDetails[$stateParams.id].name;
-        vm.id=$localStorage.courseDetails[$stateParams.id].id
+        vm.id=$localStorage.courseDetails[$stateParams.id].id;
         vm.exists=false;
         console.log($localStorage.courseDetails[$stateParams.id]);
-        vm.course={}
+        vm.course={};
         vm.course=$localStorage.courseDetails[$stateParams.id];
         vm.courseSlot={
             id:[],
@@ -31,7 +30,6 @@
             vm.courseSlot.availableSlots.push(slot.availableSlots);
         });
         console.log(vm.courseSlot)
-
         function enrollStudent(student,id){
             console.log(student,id)
             var query={};
@@ -39,7 +37,6 @@
             query.id=id;
             studentService.enrollStudent(query).then(function(response) {
                     console.log(response)
-                
                 },
                 function(failure){
                     console.log("failed")
@@ -48,21 +45,25 @@
         vm.submit=function(){
             console.log(vm.student);
             enrollStudent(vm.student,vm.id);
-        }
-        vm.checkmail=function(email) {
-            console.log("In check mail")
+            $state.go('Home');
 
-            studentService.checkMail(email).then(
-                function (response) {
-                    console.log(response)
-                    if (response.messages == "email exists")
-                        vm.exists = true;
-                    else
-                        vm.exists = false;
-                },
-                function (failure) {
-                    console.log("failed")
-                });
+        }
+        vm.checkmail=function() {
+            console.log("In check mail")
+            console.log(vm.student.email)
+            if(typeof vm.student.email != 'undefined') {
+                studentService.checkMail(vm.student.email).then(
+                    function (response) {
+                        console.log(response)
+                        if (response.messages == "email exists")
+                            vm.exists = true;
+                        else
+                            vm.exists = false;
+                    },
+                    function (failure) {
+                        console.log("failed")
+                    });
+            }
 
         }
         vm.studentSlotObject=function(id){
