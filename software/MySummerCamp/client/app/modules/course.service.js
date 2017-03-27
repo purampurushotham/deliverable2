@@ -14,13 +14,10 @@
         return setOfServices;
         function createCourse(q){
             var query=q;
-            console.log(query.course)
             return api.createCourse({q : query}).$promise
         }
         function getCourses(q){
             var query =q;
-            console.log("************ courseService)&&&&&&&&&&&&&&&")
-            console.log(query)
             return api.getCourses({q : query}).$promise
         }
       

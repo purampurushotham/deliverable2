@@ -17,7 +17,6 @@
         var vm = this;
         vm.$onInit = function () {
             loadTable();
-            console.log("in home component");
             function loadTable() {
                 vm.tableParams = new NgTableParams({
                     page:1,
@@ -34,17 +33,14 @@
                         return courseService.getCourses(query).then(function (response) {
                             vm.userTable = response.data;
                             vm.courses=checkAvailableSeats(vm.userTable);
-                            console.log(vm.courses)
                             $localStorage.courseDetails=[];
                             for (var i = 0; i < response.data.length; i++) {
                                 $localStorage.courseDetails.push(response.data[i])
                             }
-                            console.log($localStorage.courseDetails)
                             params.total(response.pagination.total);
                             var filterObj = params.filter(),filteredData = $filter('filter')(vm.courses, filterObj);
                             var sortObj = params.sorting(), orderedData = $filter('orderBy')(filteredData, filterObj);
                             var data= orderedData;
-                            console.log(data)
                             return data;
                         });
                     }
@@ -62,7 +58,6 @@
                 return courses;
             }
             vm.addCourses=function(){
-                console.log("in add ")
                 var modalInstance = uibModal.open({
                     animation: vm.animationsEnabled,
                     ariaLabelledBy: 'modal-title',

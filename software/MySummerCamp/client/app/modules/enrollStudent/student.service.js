@@ -15,13 +15,10 @@
         function checkMail(keyword) {
             var query={}
             query.keyword=keyword;
-            console.log(query)
             return api.checkMail({q: query}).$promise
         }
         function enrollStudent(q){
             var query=q;
-            console.log("************ courseService)&&&&&&&&&&&&&&&")
-            console.log(query)
             return api.enrollStudent({q : query}).$promise;
         }
     }

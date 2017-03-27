@@ -11,13 +11,10 @@ var appUtils =require('../../utils/app.utils')
 var StudentRoute= {
     checkMail: function (req, res) {
         var queryParam = (req.query && req.query.q) ? JSON.parse(req.query.q) : req.body.q
-        console.log(queryParam)
         var regularExpression = "/^" + queryParam.keyword + "/i";
         var regex = new RegExp(queryParam.keyword, "i");
-        console.log(regex)
         var query = {email: {$regex: regex}};
         student.findOne(query).exec(function (err, emailsSet) {
-            console.log({data: emailsSet});
             if (err) {
                 res.send(err);
             }
@@ -33,7 +30,6 @@ var StudentRoute= {
     },
     enrollStudent: function (req, res) {
         var queryParam = (req.query && req.query.q) ? JSON.parse(req.query.q) : req.body.q;
-        console.log(queryParam);
         course.findOne({_id: queryParam.id}).exec(function (err, courseObj) {
             if (err) {
                 return res.json(new ErrorResult("failed", err, [{'msg': 'error'}]))
@@ -50,8 +46,6 @@ var StudentRoute= {
                                 if (err1) {
                                     return res.json(new ErrorResult("failed", err1, [{'msg': 'error'}]))
                                 } else if (slot != null) {
-                                    console.log("********* slot found");
-                                    console.log(slot);
                                 }
                             });
                         res.send(new SuccessResponse("ok",'','','success'))

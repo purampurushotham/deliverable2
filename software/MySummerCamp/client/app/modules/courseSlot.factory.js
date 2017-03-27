@@ -15,7 +15,6 @@ function slotData($http,$q) {
             var products=[];
             var deffered=$q.defer();
             $http.get('../../data.json').then(function mySuccess(response) {
-                console.log(response.data)
                     deffered.resolve(response.data);
             }).then(function myError(error) {
                 deffered.reject("error in getting data");
